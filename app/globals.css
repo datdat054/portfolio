@@ -1,123 +1,87 @@
 @import 'tailwindcss';
 
-/* ============================================================
-   CSS Custom Properties — Design Tokens
-   ============================================================ */
 :root {
-  --bg:         #0A0F1E;
-  --surface:    #111827;
-  --surface-2:  #1A2236;
-  --border:     rgba(249, 115, 22, 0.15);
-  --primary:    #F97316;
-  --accent:     #FB923C;
-  --text:       #F1F5F9;
-  --muted:      #64748B;
-  --gradient:   linear-gradient(135deg, #F97316, #FB923C);
+  --bg: #f7f8fb;
+  --surface: #ffffff;
+  --surface-2: #eef2f7;
+  --border: #d9e0ea;
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --accent: #0f766e;
+  --text: #111827;
+  --muted: #5b6472;
+  --muted-2: #374151;
 
-  /* Typography */
-  --font-heading: var(--font-space, var(--font-space-grotesk)), 'Space Grotesk', system-ui, sans-serif;
-  --font-body:    var(--font-inter), 'Inter', system-ui, sans-serif;
-  --font-mono:    var(--font-mono, var(--font-jetbrains-mono)), 'JetBrains Mono', 'Fira Code', monospace;
+  --font-heading: var(--font-space, var(--font-space-grotesk)), system-ui, sans-serif;
+  --font-body: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-mono, var(--font-jetbrains-mono)), ui-monospace, monospace;
 
-  /* Spacing & Radius */
-  --radius-sm:    6px;
-  --radius-md:    12px;
-  --radius-lg:    16px;
-  --radius-xl:    24px;
-
-  /* Aliases for backwards compatibility */
-  --color-bg:        var(--bg);
-  --color-surface:   var(--surface);
-  --color-surface2:  var(--surface-2);
-  --color-primary:   var(--primary);
-  --color-accent:    var(--accent);
-  --color-text:      var(--text);
-  --color-muted:     var(--muted);
-  --color-muted2:    var(--muted);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface2: var(--surface-2);
+  --color-primary: var(--primary);
+  --color-accent: var(--accent);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-muted2: var(--muted-2);
   --color-border-subtle: var(--border);
-  --glow-primary:    0 0 24px rgba(249, 115, 22, 0.35);
-  --glow-sm:         0 0 12px rgba(249, 115, 22, 0.2);
 }
 
-/* ============================================================
-   Tailwind v4 Theme Extension
-   ============================================================ */
 @theme inline {
-  --color-bg:        var(--color-bg);
-  --color-surface:   var(--color-surface);
-  --color-surface2:  var(--color-surface2);
-  --color-primary:   var(--color-primary);
-  --color-accent:    var(--color-accent);
-  --color-text:      var(--color-text);
-  --color-muted:     var(--color-muted);
-  --color-muted2:    var(--color-muted2);
-  --font-sans:       var(--font-body);
-  --font-mono:       var(--font-mono);
+  --color-bg: var(--color-bg);
+  --color-surface: var(--color-surface);
+  --color-surface2: var(--color-surface2);
+  --color-primary: var(--color-primary);
+  --color-accent: var(--color-accent);
+  --color-text: var(--color-text);
+  --color-muted: var(--color-muted);
+  --color-muted2: var(--color-muted2);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-mono);
 }
 
-/* ============================================================
-   Base Reset & Global Styles
-   ============================================================ */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 88px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background-color: var(--bg);
+  min-height: 100vh;
+  margin: 0;
+  background:
+    linear-gradient(180deg, rgba(37, 99, 235, 0.06), transparent 320px),
+    var(--bg);
   color: var(--text);
   font-family: var(--font-body);
   font-size: 1rem;
-  line-height: 1.75;
-  min-height: 100vh;
+  line-height: 1.65;
   overflow-x: hidden;
 }
 
-/* ============================================================
-   Typography Defaults
-   ============================================================ */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  line-height: 1.2;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
   color: var(--text);
-}
-
-.hero-name {
-  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-family: var(--font-heading);
   font-weight: 700;
-  font-family: var(--font-heading);
-}
-
-.section-title {
-  font-size: clamp(1.6rem, 3.5vw, 2.25rem);
-  font-weight: 600;
-  font-family: var(--font-heading);
-}
-
-.muted-eyebrow {
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
+  line-height: 1.12;
 }
 
 p {
-  color: var(--color-muted2);
-  line-height: 1.7;
-}
-
-code, pre, kbd {
-  font-family: var(--font-mono);
+  margin: 0;
+  color: var(--muted-2);
 }
 
 a {
@@ -125,315 +89,149 @@ a {
   text-decoration: none;
 }
 
-/* ============================================================
-   Scrollbar Styling
-   ============================================================ */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--color-bg);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--color-primary);
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-accent);
+button,
+input,
+textarea {
+  font: inherit;
 }
 
-/* ============================================================
-   Selection
-   ============================================================ */
 ::selection {
-  background: rgba(249, 115, 22, 0.3);
-  color: var(--color-text);
+  background: rgba(37, 99, 235, 0.16);
 }
 
-/* ============================================================
-   Hero Dot-Grid Animation
-   ============================================================ */
-@keyframes gridPan {
-  from { background-position: 0 0; }
-  to   { background-position: 28px 28px; }
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(rgba(249,115,22,0.18) 1px, transparent 1px);
-  background-size: 28px 28px;
-  animation: gridPan 8s linear infinite;
+::-webkit-scrollbar-track {
+  background: var(--surface-2);
 }
 
-.hero-bg::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(ellipse at center, transparent 40%, #0A0F1E 100%);
+::-webkit-scrollbar-thumb {
+  background: #b8c2d2;
+  border-radius: 999px;
 }
 
-/* ============================================================
-   Terminal Float Animation
-   ============================================================ */
-@keyframes terminalFloat {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-10px); }
+.section-container {
+  width: min(100% - 2rem, 1120px);
+  margin-inline: auto;
 }
 
-.terminal-float {
-  animation: terminalFloat 4s ease-in-out infinite;
+.section-shell {
+  padding-block: clamp(3.5rem, 7vw, 5.5rem);
 }
 
-/* ============================================================
-   Blinking Cursor
-   ============================================================ */
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0; }
+.section-heading {
+  margin-bottom: 2rem;
 }
 
-.cursor-blink {
-  animation: blink 1s step-end infinite;
+.section-kicker {
+  margin-bottom: 0.6rem;
+  color: var(--primary);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-/* Typing cursor — orange, 0.7s step-end */
-.typing-cursor {
-  animation: blink 0.7s step-end infinite;
+.section-title {
+  max-width: 680px;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  letter-spacing: 0;
 }
 
-/* ============================================================
-   Navbar — Scrolled State
-   ============================================================ */
-nav {
-  transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
-}
-
-nav.scrolled {
-  background: rgba(10, 15, 30, 0.92) !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-}
-
-/* ============================================================
-   Scroll-down Bounce
-   ============================================================ */
-@keyframes scrollBounce {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(8px); }
-}
-
-.scroll-bounce {
-  animation: scrollBounce 1.5s ease-in-out infinite;
-}
-
-/* ============================================================
-   Section Divider
-   ============================================================ */
-.section-divider {
-  border: none;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.25) 30%, rgba(249, 115, 22, 0.25) 70%, transparent);
-  margin: 0;
-}
-
-/* ============================================================
-   Orange gradient text utility
-   ============================================================ */
-.gradient-text {
-  background: linear-gradient(135deg, #F97316 0%, #FB923C 50%, #FED7AA 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  background-size: 200% 200%;
-  animation: shimmer 4s ease-in-out infinite;
-}
-
-@keyframes shimmer {
-  0%, 100% { background-position: 0% 50%; }
-  50%       { background-position: 100% 50%; }
-}
-
-/* ============================================================
-   Glass Card utility
-   ============================================================ */
-.glass-card {
-  background: rgba(17, 24, 39, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+.card {
   border: 1px solid var(--border);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);
 }
 
-.glass-card:hover {
-  border-color: var(--primary);
-  box-shadow: var(--glow-primary);
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1;
 }
 
-.project-card, .skill-card {
-  background: rgba(17, 24, 39, 0.8);
-  border: 1px solid rgba(249, 115, 22, 0.15);
-  backdrop-filter: blur(12px);
-  border-radius: 12px;
-  transition: border-color 0.3s, box-shadow 0.3s;
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  border-radius: 8px;
+  padding: 0.72rem 1.05rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease;
 }
 
-.project-card:hover, .skill-card:hover {
-  border-color: rgba(249, 115, 22, 0.5);
-  box-shadow: 0 0 24px rgba(249, 115, 22, 0.1);
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
 }
 
-/* ============================================================
-   Progress Bar Base
-   ============================================================ */
+.btn-primary:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+}
+
+.btn-secondary:hover {
+  border-color: #b7c2d4;
+  transform: translateY(-1px);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #cfd8e6;
+  border-radius: 999px;
+  background: #f8fafc;
+  color: #334155;
+  padding: 0.38rem 0.7rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
 .progress-track {
-  background: var(--surface-2); 
-  height: 6px; 
-  border-radius: 3px;
-  position: relative;
+  height: 6px;
   overflow: hidden;
+  border-radius: 999px;
+  background: #dbe3ee;
 }
 
 .progress-fill {
-  background: linear-gradient(90deg, #F97316, #FB923C); 
-  border-radius: 3px;
   height: 100%;
-}
-
-/* ============================================================
-   Section Base
-   ============================================================ */
-.section-container {
-  max-width: 1280px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-}
-
-/* ============================================================
-   Timeline Connector
-   ============================================================ */
-.timeline-line {
-  position: absolute;
-  left: 19px;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: linear-gradient(to bottom, #F97316, rgba(249, 115, 22, 0.1));
-}
-
-/* ============================================================
-   Contact Input Animated Border
-   ============================================================ */
-.input-field {
-  position: relative;
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid var(--color-border-subtle);
-  color: var(--color-text);
-  width: 100%;
-  padding: 0.75rem 0;
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-  outline: none;
-  transition: border-color 0.3s ease;
-}
-
-.input-wrapper {
-  position: relative;
-}
-
-.input-wrapper::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: linear-gradient(90deg, #F97316, #FB923C);
-  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.input-wrapper:focus-within::after {
-  width: 100%;
-}
-
-/* ============================================================
-   Code Block Syntax (IntelliJ Darcula)
-   ============================================================ */
-.code-block {
-  background: #2B2B2B;
-  border-radius: 10px;
-  border: 1px solid #3C3F41;
-  padding: 1.25rem 1.5rem;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 13px;
-  line-height: 1.8;
-}
-
-.line-numbers { color: #606366; margin-right: 1.5rem; user-select: none; }
-.kw   { color: #CC7832; }   /* keywords: public, class, private, return, void */
-.str  { color: #6A8759; }   /* string literals */
-.cmt  { color: #808080; }   /* comments */
-.fn   { color: #FFC66D; }   /* method names */
-.type { color: #A9B7C6; }   /* types: String, int */
-.ann  { color: #BBB529; }   /* annotations: @Override */
-
-/* ============================================================
-   Bento Grid
-   ============================================================ */
-.bento-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: auto auto;
-  gap: 1.25rem;
-}
-
-@media (max-width: 1024px) {
-  .bento-grid {
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:
-      "featured featured"
-      "card2    card2"
-      "card3    card4";
-  }
-  .bento-featured  { grid-area: featured; }
-  .bento-card2     { grid-area: card2; }
-  .bento-card3     { grid-area: card3; }
-  .bento-card4     { grid-area: card4; }
-}
-
-@media (max-width: 640px) {
-  .bento-grid {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "featured"
-      "card2"
-      "card3"
-      "card4";
-  }
-}
-
-/* ============================================================
-   Responsive Utilities
-   ============================================================ */
-@media (max-width: 375px) {
-  .section-container {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-}
-
-/* ============================================================
-   Accessibility & Polish
-   ============================================================ */
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 80px;
+  border-radius: inherit;
+  background: var(--primary);
 }
 
 *:focus-visible {
-  outline: 2px solid #F97316 !important;
-  outline-offset: 2px !important;
+  outline: 3px solid rgba(37, 99, 235, 0.35);
+  outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+  .section-container {
+    width: min(100% - 1.25rem, 1120px);
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+  }
 }

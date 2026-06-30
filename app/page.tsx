@@ -14,17 +14,12 @@ export default function Home() {
     <>
       <TopProgressBar />
       <Navbar />
-      <main id="main-content">
+      <main id="main-content" className="overflow-hidden">
         <Hero />
-        <hr className="section-divider" />
         <About />
-        <hr className="section-divider" />
         <Skills />
-        <hr className="section-divider" />
         <Projects />
-        <hr className="section-divider" />
         <Experience />
-        <hr className="section-divider" />
         <Contact />
       </main>
       <Footer />
