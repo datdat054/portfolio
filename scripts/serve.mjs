@@ -49,7 +49,10 @@ export function resolveStaticAsset(rawUrl, baseDir = rootDir) {
     return { status: 403, contentType: 'text/plain', body: 'Forbidden' };
   }
 
-  const isAllowedPublicPath = relPath === '/index.html' || relPath.startsWith('/assets/');
+  const isAllowedPublicPath =
+    relPath === '/index.html' ||
+    relPath === '/embedded-cv.html' ||
+    relPath.startsWith('/assets/');
   if (!isAllowedPublicPath) {
     return { status: 404, contentType: 'text/plain', body: 'Not Found' };
   }

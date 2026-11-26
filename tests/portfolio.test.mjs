@@ -11,9 +11,10 @@ const PortfolioApp = require('../assets/js/script.js');
 
 const ROOT = process.cwd();
 const HTML_CONTENT = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+const EMBEDDED_CV_CONTENT = fs.readFileSync(path.join(ROOT, 'embedded-cv.html'), 'utf8');
 const CSS_CONTENT = fs.readFileSync(path.join(ROOT, 'assets/css/style.css'), 'utf8');
 
-describe('Portfolio HTML & CV Content Integrity', () => {
+describe('Portfolio HTML & Dual-CV Content Integrity', () => {
   let dom;
   let doc;
 
@@ -22,18 +23,31 @@ describe('Portfolio HTML & CV Content Integrity', () => {
     doc = dom.window.document;
   });
 
-  it('contains Luu Duc Dat personal information from CV', () => {
+  it('contains Luu Duc Dat Java Backend, Embedded/IoT, GPA 3.1, Year 2004, and Merit Award details', () => {
     const bodyText = (doc.body.textContent || '').replace(/\s+/g, ' ');
     assert.ok(doc.title.includes('Luu Duc Dat'));
     assert.ok(bodyText.includes('Luu Duc Dat'));
+    assert.ok(bodyText.includes('2004'));
     assert.ok(bodyText.includes('tkqb0ducdat@gmail.com'));
     assert.ok(bodyText.includes('0832 098 415'));
     assert.ok(bodyText.includes('PTIT HCMC'));
-    assert.ok(bodyText.includes('3.0/4.0'));
-    assert.ok(bodyText.includes('TOEIC 600'));
-    assert.ok(bodyText.includes('JLPT N5'));
+    assert.ok(bodyText.includes('3.1/4.0'));
+    assert.ok(bodyText.includes('TOEIC 515'));
+    assert.ok(bodyText.includes('N5'));
+    assert.ok(bodyText.includes('QĐ khen thưởng SV HK1, NH 2023-2024'));
+    assert.ok(bodyText.includes('KKHT'));
     assert.ok(bodyText.includes('Microservices-Based E-Commerce System'));
     assert.ok(bodyText.includes('Online Course Management RESTful API'));
+    assert.ok(bodyText.includes('Driver Drowsiness Detection System'));
+    assert.ok(bodyText.includes('Smart Home Security System with Pan-Tilt Camera'));
+
+    const embeddedDom = new JSDOM(EMBEDDED_CV_CONTENT, { url: 'http://localhost:3000/embedded-cv.html' });
+    const embeddedText = (embeddedDom.window.document.body.textContent || '').replace(/\s+/g, ' ');
+    assert.ok(embeddedText.includes('IoT / Embedded Firmware Developer'));
+    assert.ok(embeddedText.includes('Year of Birth: 2004'));
+    assert.ok(embeddedText.includes('3.1 / 4.0'));
+    assert.ok(embeddedText.includes('QĐ khen thưởng SV HK1, NH 2023-2024'));
+    assert.ok(embeddedText.includes('Smart Home Security System with Pan-Tilt Camera'));
   });
 
   it('contains zero leftover details or keys from reference portfolio', () => {
@@ -51,26 +65,32 @@ describe('Portfolio HTML & CV Content Integrity', () => {
     ];
     for (const token of forbidden) {
       assert.equal(HTML_CONTENT.includes(token), false, `Found forbidden token: ${token}`);
+      assert.equal(EMBEDDED_CV_CONTENT.includes(token), false, `Found forbidden token in embedded CV: ${token}`);
     }
   });
 
   it('has valid local assets for every img, link, script, PDF, and CSS url()', () => {
-    const refs = [...HTML_CONTENT.matchAll(/(?:src|href)=["']([^"']+)["']/gi)].map((m) => m[1]);
-    for (const ref of refs) {
-      if (
-        !ref ||
-        ref.startsWith('#') ||
-        ref.startsWith('http://') ||
-        ref.startsWith('https://') ||
-        ref.startsWith('mailto:') ||
-        ref.startsWith('tel:')
-      ) {
-        continue;
+    for (const [pageName, content] of [
+      ['index.html', HTML_CONTENT],
+      ['embedded-cv.html', EMBEDDED_CV_CONTENT]
+    ]) {
+      const refs = [...content.matchAll(/(?:src|href)=["']([^"']+)["']/gi)].map((m) => m[1]);
+      for (const ref of refs) {
+        if (
+          !ref ||
+          ref.startsWith('#') ||
+          ref.startsWith('http://') ||
+          ref.startsWith('https://') ||
+          ref.startsWith('mailto:') ||
+          ref.startsWith('tel:')
+        ) {
+          continue;
+        }
+        const clean = ref.split('#')[0].split('?')[0];
+        const fullPath = path.resolve(ROOT, clean);
+        assert.equal(fs.existsSync(fullPath), true, `Missing asset in ${pageName}: ${ref}`);
+        assert.ok(fs.statSync(fullPath).size > 0, `Empty asset in ${pageName}: ${ref}`);
       }
-      const clean = ref.split('#')[0].split('?')[0];
-      const fullPath = path.resolve(ROOT, clean);
-      assert.equal(fs.existsSync(fullPath), true, `Missing HTML asset: ${ref}`);
-      assert.ok(fs.statSync(fullPath).size > 0, `Empty HTML asset: ${ref}`);
     }
 
     const cssUrls = [...CSS_CONTENT.matchAll(/url\(["']?([^"')]+)["']?\)/gi)].map((m) => m[1]);
@@ -83,7 +103,10 @@ describe('Portfolio HTML & CV Content Integrity', () => {
   });
 
   it('enforces rel="noopener noreferrer" on all target="_blank" links and has no dead # links', () => {
-    const externalLinks = [...doc.querySelectorAll('a[target="_blank"]')];
+    const externalLinks = [
+      ...doc.querySelectorAll('a[target="_blank"]'),
+      ...new JSDOM(EMBEDDED_CV_CONTENT).window.document.querySelectorAll('a[target="_blank"]')
+    ];
     assert.ok(externalLinks.length > 0);
     for (const link of externalLinks) {
       const rel = (link.getAttribute('rel') || '').split(/\s+/);
@@ -106,7 +129,7 @@ describe('Portfolio HTML & CV Content Integrity', () => {
     }
 
     const modalTriggers = [...doc.querySelectorAll('[data-toggle="modal"]')];
-    assert.equal(modalTriggers.length, 5);
+    assert.equal(modalTriggers.length, 6);
     for (const trigger of modalTriggers) {
       const target = trigger.getAttribute('data-target');
       assert.match(target, /^#portfolioItem\d+$/);
@@ -114,12 +137,7 @@ describe('Portfolio HTML & CV Content Integrity', () => {
     }
 
     const cards = [...doc.querySelectorAll('#grid [data-groups]')];
-    assert.equal(cards.length, 5);
-    for (const card of cards) {
-      const parsed = JSON.parse(card.getAttribute('data-groups'));
-      assert.equal(Array.isArray(parsed), true);
-      assert.ok(parsed.length > 0);
-    }
+    expectValidCards(cards, 6);
   });
 
   it('does not contain the template CSS typos', () => {
@@ -127,6 +145,15 @@ describe('Portfolio HTML & CV Content Integrity', () => {
     assert.equal(CSS_CONTENT.includes('.acitve'), false);
   });
 });
+
+function expectValidCards(cards, expectedCount) {
+  assert.equal(cards.length, expectedCount);
+  for (const card of cards) {
+    const parsed = JSON.parse(card.getAttribute('data-groups'));
+    assert.equal(Array.isArray(parsed), true);
+    assert.ok(parsed.length > 0);
+  }
+}
 
 describe('Portfolio Interactive Behavior', () => {
   let dom;
@@ -169,14 +196,14 @@ describe('Portfolio Interactive Behavior', () => {
     const valid = PortfolioApp.validateContactPayload({
       name: 'HR Team',
       email: 'hr@example.com',
-      subject: 'Java Backend Interview',
+      subject: 'Embedded / Backend Interview',
       message: 'Let us schedule a call.'
     });
     assert.equal(valid.ok, true);
 
     const url = PortfolioApp.buildMailtoUrl('tkqb0ducdat@gmail.com', valid.data);
     assert.ok(url.includes('mailto:tkqb0ducdat@gmail.com?subject='));
-    assert.ok(url.includes('Java%20Backend%20Interview'));
+    assert.ok(url.includes('Embedded%20%2F%20Backend%20Interview'));
     assert.ok(url.includes('HR%20Team'));
   });
 
@@ -197,7 +224,7 @@ describe('Portfolio Interactive Behavior', () => {
 
     doc.getElementById('name').value = 'Nguyen Van A';
     doc.getElementById('email').value = 'a@example.com';
-    doc.getElementById('subject').value = 'Backend Role';
+    doc.getElementById('subject').value = 'IoT / Backend Role';
     doc.getElementById('message').value = 'Would love to connect.';
 
     form.dispatchEvent(new win.Event('submit', { bubbles: true, cancelable: true }));
@@ -211,8 +238,9 @@ describe('Portfolio Interactive Behavior', () => {
     PortfolioApp.filterProjectsDom(doc, 'embedded');
     const items = [...doc.querySelectorAll('#grid [data-groups]')];
     const visible = items.filter((el) => el.getAttribute('data-filtered-visible') === 'true');
-    assert.equal(visible.length, 1);
-    assert.ok(visible[0].textContent.includes('Driver Drowsiness Detection'));
+    assert.equal(visible.length, 2);
+    assert.ok(visible.some((el) => el.textContent.includes('Driver Drowsiness Detection')));
+    assert.ok(visible.some((el) => el.textContent.includes('Smart Home Pan-Tilt Security')));
 
     PortfolioApp.filterProjectsDom(doc, 'java');
     const javaVisible = items.filter((el) => el.getAttribute('data-filtered-visible') === 'true');
@@ -220,12 +248,12 @@ describe('Portfolio Interactive Behavior', () => {
 
     PortfolioApp.filterProjectsDom(doc, 'all');
     const allVisible = items.filter((el) => el.getAttribute('data-filtered-visible') === 'true');
-    assert.equal(allVisible.length, 5);
+    assert.equal(allVisible.length, 6);
   });
 
   it('animates hero typing text and activates visible reveal elements', (t) => {
     t.mock.timers.enable({ apis: ['setTimeout'] });
-    const stop = PortfolioApp.initTypingEffect(doc, ['Java Dev', 'Spring Dev']);
+    const stop = PortfolioApp.initTypingEffect(doc, ['Java Dev', 'Embedded Dev']);
     const el = doc.querySelector('.auto-input');
     assert.equal(el.textContent, 'Java Dev');
 
@@ -242,11 +270,16 @@ describe('Portfolio Interactive Behavior', () => {
 });
 
 describe('Static Server & CI/CD Configuration', () => {
-  it('serves index.html, CSS, and resume PDF and blocks path traversal', async () => {
+  it('serves index.html, embedded-cv.html, and resume PDF and blocks path traversal', async () => {
     const homeRes = await invokeStaticRequest('/', ROOT);
     assert.equal(homeRes.status, 200);
     assert.ok(homeRes.headers['Content-Type'].includes('text/html'));
     assert.ok(homeRes.body.toString('utf8').includes('Luu Duc Dat'));
+
+    const embeddedRes = await invokeStaticRequest('/embedded-cv.html', ROOT);
+    assert.equal(embeddedRes.status, 200);
+    assert.ok(embeddedRes.headers['Content-Type'].includes('text/html'));
+    assert.ok(embeddedRes.body.toString('utf8').includes('IoT / Embedded Firmware Developer'));
 
     const pdfRes = await invokeStaticRequest('/assets/resume/cv-of-LuuDucDat.pdf', ROOT);
     assert.equal(pdfRes.status, 200);

@@ -9,9 +9,9 @@
 
   var TYPING_ROLES = [
     'Java Backend Developer',
-    'Spring Boot Engineer',
-    'Microservices Architect',
-    'Software Engineering Student'
+    'IoT / Embedded Firmware Developer',
+    'Spring Boot & Microservices Engineer',
+    'ESP32, FreeRTOS & Edge AI Developer'
   ];
 
   function isValidEmail(email) {

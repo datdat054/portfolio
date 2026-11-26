@@ -7,7 +7,7 @@
     "dev": "node scripts/serve.mjs",
     "start": "node scripts/serve.mjs",
     "build": "node scripts/build.mjs",
-    "lint": "eslint assets/js/script.js scripts tests && html-validate index.html",
+    "lint": "eslint assets/js/script.js scripts tests && html-validate index.html embedded-cv.html",
     "test": "node --test tests/portfolio.test.mjs",
     "verify": "npm run lint && npm test && npm run build"
   },

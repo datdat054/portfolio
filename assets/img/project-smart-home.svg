@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Smart Home Security System with Pan-Tilt Camera">
+  <defs>
+    <linearGradient id="bgSH" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#164e63"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bgSH)"/>
+  <g stroke="#22d3ee" stroke-opacity="0.18" fill="none">
+    <circle cx="400" cy="215" r="85"/>
+    <circle cx="400" cy="215" r="135"/>
+    <circle cx="400" cy="215" r="185"/>
+  </g>
+  <path d="M275 185L400 95l125 90v120H275V185z" fill="#0f172a" stroke="#38bdf8" stroke-width="3"/>
+  <rect x="355" y="175" width="90" height="58" rx="10" fill="#1e293b" stroke="#22d3ee" stroke-width="2.5"/>
+  <circle cx="400" cy="204" r="17" fill="#0284c7" stroke="#bae6fd" stroke-width="2"/>
+  <circle cx="400" cy="204" r="6" fill="#e0f2fe"/>
+  <path d="M342 252h116M400 233v19" stroke="#7dd3fc" stroke-width="3" stroke-linecap="round"/>
+  <rect x="110" y="348" width="580" height="88" rx="10" fill="#0f172a" stroke="#22d3ee" stroke-width="2"/>
+  <text x="400" y="386" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#ffffff">Smart Home Security (Pan-Tilt IoT)</text>
+  <text x="400" y="414" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#a5f3fc">ESP32 · PIR Motion Sensor · Dual Servo Pan-Tilt · motionEye Alerts</text>
+</svg>
