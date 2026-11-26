@@ -1,0 +1,44 @@
+image: node:22-alpine
+
+stages:
+  - test
+  - deploy
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+
+test_and_build:
+  stage: test
+  script:
+    - npm ci
+    - npm run lint
+    - npm test
+    - npm run build
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 week
+
+pages:
+  stage: deploy
+  needs:
+    - test_and_build
+  script:
+    - rm -rf public
+    - cp -r dist public
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+deploy_vercel:
+  stage: deploy
+  needs:
+    - test_and_build
+  script:
+    - npx --yes vercel@latest deploy --prod --yes --token="$VERCEL_TOKEN"
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $VERCEL_TOKEN != null && $VERCEL_TOKEN != ""

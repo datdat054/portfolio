@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Driver Drowsiness Detection ESP32-CAM">
+  <defs>
+    <linearGradient id="bg4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b"/>
+      <stop offset="100%" stop-color="#312e81"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg4)"/>
+  <rect x="230" y="90" width="340" height="210" rx="14" fill="#0f172a" stroke="#38bdf8" stroke-width="3"/>
+  <circle cx="400" cy="195" r="56" fill="#1e293b" stroke="#60a5fa" stroke-width="4"/>
+  <circle cx="400" cy="195" r="26" fill="#0284c7"/>
+  <circle cx="408" cy="187" r="7" fill="#bae6fd"/>
+  <rect x="252" y="112" width="60" height="22" rx="4" fill="#ef4444"/><text x="282" y="128" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#fff">LIVE</text>
+  <text x="505" y="128" text-anchor="middle" font-family="monospace" font-size="13" fill="#38bdf8">ESP32-CAM</text>
+  <rect x="120" y="348" width="560" height="86" rx="10" fill="#0f172a" stroke="#818cf8" stroke-width="2"/>
+  <text x="400" y="386" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#ffffff">Driver Drowsiness Detection</text>
+  <text x="400" y="414" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#c7d2fe">C++ · FreeRTOS Real-Time Task Scheduling · Embedded Vision</text>
+</svg>

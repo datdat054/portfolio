@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Education icon">
+  <rect width="120" height="120" rx="16" fill="#eff6ff"/>
+  <path d="M60 28L16 50l44 22 44-22-44-22z" fill="#3a8def"/>
+  <path d="M32 61v22c0 8 12 15 28 15s28-7 28-15V61L60 75 32 61z" fill="#1d4ed8"/>
+  <path d="M98 54v28" stroke="#1e3a8a" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="98" cy="84" r="4" fill="#3a8def"/>
+</svg>

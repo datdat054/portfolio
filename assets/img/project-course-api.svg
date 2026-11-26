@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Online Course Management RESTful API">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f2942"/>
+      <stop offset="100%" stop-color="#134e4a"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg2)"/>
+  <rect x="85" y="55" width="630" height="390" rx="12" fill="#0f172a" stroke="#2dd4bf" stroke-width="2"/>
+  <rect x="85" y="55" width="630" height="44" rx="12" fill="#1e293b"/>
+  <circle cx="115" cy="77" r="7" fill="#ef4444"/><circle cx="137" cy="77" r="7" fill="#f59e0b"/><circle cx="159" cy="77" r="7" fill="#22c55e"/>
+  <text x="400" y="83" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#e2e8f0">Course Management OpenAPI / Swagger Docs</text>
+  <rect x="120" y="126" width="560" height="54" rx="6" fill="#064e3b" stroke="#10b981"/>
+  <rect x="134" y="139" width="76" height="28" rx="4" fill="#10b981"/><text x="172" y="158" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#022c22">POST</text>
+  <text x="228" y="158" font-family="monospace" font-size="16" fill="#ecfdf5">/api/v1/courses/enroll</text>
+  <rect x="120" y="198" width="560" height="54" rx="6" fill="#1e3a8a" stroke="#3b82f6"/>
+  <rect x="134" y="211" width="76" height="28" rx="4" fill="#3b82f6"/><text x="172" y="230" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#fff">GET</text>
+  <text x="228" y="230" font-family="monospace" font-size="16" fill="#eff6ff">/api/v1/lectures/{courseId}</text>
+  <rect x="120" y="270" width="560" height="54" rx="6" fill="#78350f" stroke="#f59e0b"/>
+  <rect x="134" y="283" width="76" height="28" rx="4" fill="#f59e0b"/><text x="172" y="302" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#451a03">PUT</text>
+  <text x="228" y="302" font-family="monospace" font-size="16" fill="#fffbeb">/api/v1/enrollments/status</text>
+  <rect x="120" y="352" width="175" height="58" rx="8" fill="#1e293b" stroke="#38bdf8"/>
+  <text x="207" y="380" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#fff">Hibernate ORM</text>
+  <text x="207" y="399" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#94a3b8">@Transactional Safety</text>
+  <rect x="312" y="352" width="175" height="58" rx="8" fill="#1e293b" stroke="#22c55e"/>
+  <text x="399" y="380" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#fff">Service Unit Tests</text>
+  <text x="399" y="399" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#94a3b8">Business Logic Verified</text>
+  <rect x="504" y="352" width="176" height="58" rx="8" fill="#1e293b" stroke="#a855f7"/>
+  <text x="592" y="380" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#fff">Postman + MySQL</text>
+  <text x="592" y="399" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#94a3b8">Verified API Contracts</text>
+</svg>

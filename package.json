@@ -1,28 +1,21 @@
 {
   "name": "portfolio",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
+  "description": "Static portfolio and CV website for Luu Duc Dat (Java Backend Developer)",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
-  },
-  "dependencies": {
-    "framer-motion": "^12.42.0",
-    "lucide-react": "^1.22.0",
-    "next": "16.2.9",
-    "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "dev": "node scripts/serve.mjs",
+    "start": "node scripts/serve.mjs",
+    "build": "node scripts/build.mjs",
+    "lint": "eslint assets/js/script.js scripts tests && html-validate index.html",
+    "test": "node --test tests/portfolio.test.mjs",
+    "verify": "npm run lint && npm test && npm run build"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.2.9",
-    "tailwindcss": "^4",
-    "typescript": "^5"
+    "@eslint/js": "^9.39.1",
+    "eslint": "^9.39.1",
+    "globals": "^16.5.0",
+    "html-validate": "^10.2.0",
+    "jsdom": "^27.0.1"
   }
 }
