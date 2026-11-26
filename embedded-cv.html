@@ -54,6 +54,21 @@
             border-bottom: 2px solid #1d4ed8;
             padding-bottom: 14px;
             margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+        .cv-avatar {
+            width: 108px;
+            height: 108px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            object-fit: cover;
+            clip-path: circle(45% at 50% 50%);
+        }
+        .cv-header-info {
+            flex: 1;
+            min-width: 0;
         }
         .cv-header h1 {
             margin: 0 0 4px;
@@ -140,6 +155,13 @@
             .cv-sheet {
                 padding: 24px 18px;
             }
+            .cv-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .cv-meta {
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -155,15 +177,18 @@
 
     <main class="cv-sheet">
         <header class="cv-header">
-            <h1>LUU DUC DAT</h1>
-            <div class="cv-role">IoT / Embedded Firmware Developer</div>
-            <div class="cv-sub">Embedded C/C++ &middot; ESP32 &middot; FreeRTOS &middot; Edge AI</div>
-            <div class="cv-meta">
-                <span><i class="fa fa-map-marker" aria-hidden="true"></i> Ho Chi Minh City, Vietnam</span>
-                <span><i class="fa fa-calendar" aria-hidden="true"></i> Year of Birth: 2004</span>
-                <span><i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:tkqb0ducdat@gmail.com">tkqb0ducdat@gmail.com</a></span>
-                <span><i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:0832098415">0832&nbsp;098&nbsp;415</a></span>
-                <span><i class="fa fa-github" aria-hidden="true"></i> <a href="https://github.com/datdat054" target="_blank" rel="noopener noreferrer">github.com/datdat054</a></span>
+            <img src="assets/img/avatar-dat.jpg" alt="Luu Duc Dat portrait" class="cv-avatar">
+            <div class="cv-header-info">
+                <h1>LUU DUC DAT</h1>
+                <div class="cv-role">IoT / Embedded Firmware Developer</div>
+                <div class="cv-sub">Embedded C/C++ &middot; ESP32 &middot; FreeRTOS &middot; Edge AI</div>
+                <div class="cv-meta">
+                    <span><i class="fa fa-map-marker" aria-hidden="true"></i> Ho Chi Minh City, Vietnam</span>
+                    <span><i class="fa fa-calendar" aria-hidden="true"></i> Year of Birth: 2004</span>
+                    <span><i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:tkqb0ducdat@gmail.com">tkqb0ducdat@gmail.com</a></span>
+                    <span><i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:0832098415">0832&nbsp;098&nbsp;415</a></span>
+                    <span><i class="fa fa-github" aria-hidden="true"></i> <a href="https://github.com/datdat054" target="_blank" rel="noopener noreferrer">github.com/datdat054</a></span>
+                </div>
             </div>
         </header>
 
@@ -183,7 +208,7 @@
             <div class="cv-subtitle">Bachelor of Engineering in Information Technology | Major: Software Engineering</div>
             <ul>
                 <li><strong>GPA:</strong> 3.1 / 4.0</li>
-                <li><strong>Honors &amp; Scholarship:</strong> PTIT School-Level Student Merit Award &amp; KKHT Scholarship &mdash; HK1, Academic Year 2023&ndash;2024 (Q&#272; khen th&#432;&#7903;ng SV HK1, NH 2023-2024, TTR - C&#7845;p Tr&#432;&#7901;ng, 12/08/2024).</li>
+                <li><strong>Honors &amp; Scholarship:</strong> PTIT University-Level Academic Excellence Award &amp; Merit Scholarship &mdash; Semester 1, Academic Year 2023&ndash;2024 (Awarded 12 Aug 2024).</li>
                 <li><strong>Relevant Coursework:</strong> Embedded Systems, IoT System Development, Data Structures and Algorithms, Object-Oriented Programming (OOP), Software Architecture.</li>
             </ul>
         </section>

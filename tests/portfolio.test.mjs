@@ -23,7 +23,7 @@ describe('Portfolio HTML & Dual-CV Content Integrity', () => {
     doc = dom.window.document;
   });
 
-  it('contains Luu Duc Dat Java Backend, Embedded/IoT, GPA 3.1, Year 2004, and Merit Award details', () => {
+  it('contains Luu Duc Dat Java Backend, Embedded/IoT, GPA 3.1, Year 2004, avatar, and English Merit Award details', () => {
     const bodyText = (doc.body.textContent || '').replace(/\s+/g, ' ');
     assert.ok(doc.title.includes('Luu Duc Dat'));
     assert.ok(bodyText.includes('Luu Duc Dat'));
@@ -34,20 +34,30 @@ describe('Portfolio HTML & Dual-CV Content Integrity', () => {
     assert.ok(bodyText.includes('3.1/4.0'));
     assert.ok(bodyText.includes('TOEIC 515'));
     assert.ok(bodyText.includes('N5'));
-    assert.ok(bodyText.includes('QĐ khen thưởng SV HK1, NH 2023-2024'));
-    assert.ok(bodyText.includes('KKHT'));
+    assert.ok(bodyText.includes('Academic Excellence Award & Merit Scholarship'));
     assert.ok(bodyText.includes('Microservices-Based E-Commerce System'));
     assert.ok(bodyText.includes('Online Course Management RESTful API'));
     assert.ok(bodyText.includes('Driver Drowsiness Detection System'));
     assert.ok(bodyText.includes('Smart Home Security System with Pan-Tilt Camera'));
+    assert.ok(HTML_CONTENT.includes('assets/img/avatar-dat.jpg'));
+
+    const vietnameseTerms = ['khen thưởng', 'Cấp Trường', 'Học bổng', 'KKHT', 'QĐ'];
+    for (const term of vietnameseTerms) {
+      assert.equal(bodyText.includes(term), false, `Found Vietnamese term in index.html: ${term}`);
+    }
 
     const embeddedDom = new JSDOM(EMBEDDED_CV_CONTENT, { url: 'http://localhost:3000/embedded-cv.html' });
     const embeddedText = (embeddedDom.window.document.body.textContent || '').replace(/\s+/g, ' ');
     assert.ok(embeddedText.includes('IoT / Embedded Firmware Developer'));
     assert.ok(embeddedText.includes('Year of Birth: 2004'));
     assert.ok(embeddedText.includes('3.1 / 4.0'));
-    assert.ok(embeddedText.includes('QĐ khen thưởng SV HK1, NH 2023-2024'));
+    assert.ok(embeddedText.includes('University-Level Academic Excellence Award & Merit Scholarship'));
     assert.ok(embeddedText.includes('Smart Home Security System with Pan-Tilt Camera'));
+    assert.ok(EMBEDDED_CV_CONTENT.includes('assets/img/avatar-dat.jpg'));
+
+    for (const term of vietnameseTerms) {
+      assert.equal(embeddedText.includes(term), false, `Found Vietnamese term in embedded-cv.html: ${term}`);
+    }
   });
 
   it('contains zero leftover details or keys from reference portfolio', () => {

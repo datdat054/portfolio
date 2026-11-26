@@ -211,6 +211,19 @@ body {
   object-fit: contain;
 }
 
+.big-rectangle--avatar {
+  background-color: #ffffff;
+  border-color: #bfdbfe;
+}
+
+.big-rectangle img.avatar-portrait {
+  width: 96%;
+  height: 96%;
+  object-fit: cover;
+  border-radius: 50%;
+  clip-path: circle(44% at 50% 50%);
+}
+
 .big-rectangle {
   position: absolute;
   top: 50%;
